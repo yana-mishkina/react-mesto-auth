@@ -10,10 +10,12 @@ function Main(props) {
 
   return (
     <>
-      <Header
-        text="Выйти"
-        link="/sign-in"
-        email={props.email} />
+      <Header>
+        <div className="header__container">
+          <p className="header__email">{props.email}</p>
+          <button className="button header__button" onClick={props.onSignOut}>Выйти</button>
+        </div>
+      </Header>
         
       <main className="content">
         <section className="profile">

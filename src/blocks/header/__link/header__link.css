@@ -11,12 +11,6 @@
 .header__link:hover {
   opacity: 0.6;
 }
-
-@media screen and (max-width: 991px) {
-  .header__link {
-    padding-right: 27px;
-  }
-}
   
 @media screen and (max-width: 530px) {
   .header__link {

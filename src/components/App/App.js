@@ -8,7 +8,7 @@ import EditProfilePopup from "../EditProfilePopup/EditProfilePopup";
 import EditAvatarPopup from "../EditAvatarPopup/EditAvatarPopup";
 import AddPlacePopup from "../AddPlacePopup/AddPlacePopup";
 import DeleteConfirmPopup from "../DeleteConfirmPopup/DeleteConfirmPopup";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory, Link } from "react-router-dom";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
@@ -204,7 +204,11 @@ function App() {
     }
   }, [history]);
 
-
+  function handleSignOut() {
+    setIsLoggedIn(false);
+    localStorage.removeItem('jwt');
+    history.push('/sign-in');
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -249,27 +253,33 @@ function App() {
             <Route path="/sign-up">
               <InfoTooltip
                 isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups} />
-              <Header 
-                text="Войти"
-                link="/sign-in"
-                email="" />
-              <Register
-                onRegister={handleRegisterSubmit}
+                onClose={closeAllPopups}
                 isSuccessAction={isSuccessAction} />
+
+              <Header>
+                <div className="header__container">
+                  <Link className="header__link" to="/sign-in">Войти</Link>
+                </div>
+              </Header>
+
+              <Register
+                onRegister={handleRegisterSubmit} />
             </Route>
 
             <Route path="/sign-in">
             <InfoTooltip
                 isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups} />
-              <Header
-                text="Регистрация"
-                link="/sign-up"
-                email="" />
-              <Login
-                onLogin={handleLoginSubmit}
+                onClose={closeAllPopups}
                 isSuccessAction={isSuccessAction} />
+
+              <Header>
+                <div className="header__container">
+                  <Link className="header__link" to="/sign-up">Регистрация</Link>
+                </div>
+              </Header>
+
+              <Login
+                onLogin={handleLoginSubmit} />
             </Route>
             
             <ProtectedRoute 
@@ -284,6 +294,7 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleDeleteConfirmPopupOpen}
               email={email}
+              onSignOut={handleSignOut}
               />
 
             <Route>
