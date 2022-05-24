@@ -40,7 +40,7 @@ function Login(props) {
           minLength='4'
           value={password}
           onChange={handlePasswordChange} />
-        <button className='button button_type_submit route-form__button' type='submit'>Войти</button>
+        <button className='button button_type_submit route-form__button' type='submit'>{props.isLoadingData ? 'Вход...' : 'Войти'}</button>
       </form>
    </section>
   )

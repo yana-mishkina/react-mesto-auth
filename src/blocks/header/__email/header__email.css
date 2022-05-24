@@ -6,3 +6,9 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media screen and (max-width: 530px) {
+  .header__email {
+    visibility: hidden;
+  }
+}

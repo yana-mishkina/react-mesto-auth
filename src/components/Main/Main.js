@@ -3,6 +3,9 @@ import Card from "../Card/Card";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header"
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import burgerIcon from "../../images/Burger-icon.svg";
+import HeaderPopup from "../HeaderPopup/HeaderPopup";
+import closeIcon from "../../images/Close_Icon.svg";
 
 function Main(props) {
 
@@ -10,10 +13,20 @@ function Main(props) {
 
   return (
     <>
+      <HeaderPopup
+        isBurgerOpen={props.isBurgerOpen}
+        onSignOut={props.onSignOut}
+        email={props.email} />
+
       <Header>
         <div className="header__container">
           <p className="header__email">{props.email}</p>
           <button className="button header__button" onClick={props.onSignOut}>Выйти</button>
+          <button className="button header__button header__button_burger" onClick={props.isBurgerOpen ? props.onBurgerOpen : props.onBurgerClose}>
+            {props.isBurgerOpen ? 
+              <img className="header__button-img" src={burgerIcon} alt="Иконка меню"/> : 
+              <img className="header__button-img" src={closeIcon} alt="Иконка закрытия"/>}
+          </button>
         </div>
       </Header>
         

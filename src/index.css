@@ -63,3 +63,9 @@
 @import url(./blocks/header/__email/header__email.css);
 @import url(./blocks/header/__container/header__container.css);
 @import url(./blocks/header/__button/header__button.css);
+@import url(./blocks/header/__button/_burger/header__button_burger.css);
+@import url(./blocks/header-popup/header-popup.css);
+@import url(./blocks/header-popup/__email/header-popup__email.css);
+@import url(./blocks/header-popup/__button/header-popup__button.css);
+@import url(./blocks/header-popup/_closed/header-popup_closed.css);
+@import url(./blocks/header/__button-img/header__button-img.css);

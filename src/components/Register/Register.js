@@ -43,7 +43,7 @@ function Register(props) {
           value={password}
           onChange={handlePasswordChange} 
           />
-        <button className='button button_type_submit route-form__button' type='submit'>Зарегистрироваться</button>
+        <button className='button button_type_submit route-form__button' type='submit'>{props.isLoadingData ? 'Регистрация...' : 'Зарегистрироваться'}</button>
         <Link className='route-form__link' to='/sign-in'>Уже зарегистрированы? Войти</Link>
       </form>
    </section>

@@ -27,6 +27,8 @@ function App() {
     React.useState(false);
   const [isDeleteConfirmPopupOpen, setIsDeleteConfirmPopupOpen] =
     React.useState(false);
+  const [isBurgerOpen, setIsBurgerOpen] =
+    React.useState(true);
   const [selectedCard, setSelectedCard] = React.useState({
     name: "",
     link: "",
@@ -99,6 +101,10 @@ function App() {
     setIsInfoTooltipOpen(true);
   }
 
+  function handeleBurgerOpen() {
+    setIsBurgerOpen(false);
+  }
+
   function handleCardClick(card) {
     setSelectedCard(card);
     setIsPhotoViewingPopupOpen(true);
@@ -112,6 +118,7 @@ function App() {
     setIsDeleteConfirmPopupOpen(false);
     setSelectedCard({ name: "", link: "" });
     setIsInfoTooltipOpen(false);
+    setIsBurgerOpen(true);
   }
 
   function handleUpdateUser(data) {
@@ -157,6 +164,7 @@ function App() {
   }
   
   function handleRegisterSubmit(data) {
+    setIsLoading(true);
     auth
       .register(data.email, data.password)
       .then(() => {
@@ -169,14 +177,18 @@ function App() {
         setIsSuccessAction(false);
         handleInfoTooltipOpen();
     })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function handleLoginSubmit(data) {
+    setIsLoading(true);
     auth
       .login(data.email, data.password)
       .then((data) => {
         localStorage.setItem('jwt', data.token);
-        setEmail(data.email);
+        setEmail(email);
         setIsLoggedIn(true);
         history.push('/');
       })
@@ -185,6 +197,9 @@ function App() {
         setIsSuccessAction(false);
         setIsInfoTooltipOpen(true);
     })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   React.useEffect(() => {
@@ -263,7 +278,8 @@ function App() {
               </Header>
 
               <Register
-                onRegister={handleRegisterSubmit} />
+                onRegister={handleRegisterSubmit}
+                isLoadingData={isLoading} />
             </Route>
 
             <Route path="/sign-in">
@@ -279,7 +295,8 @@ function App() {
               </Header>
 
               <Login
-                onLogin={handleLoginSubmit} />
+                onLogin={handleLoginSubmit}
+                isLoadingData={isLoading} />
             </Route>
             
             <ProtectedRoute 
@@ -295,6 +312,9 @@ function App() {
               onCardDelete={handleDeleteConfirmPopupOpen}
               email={email}
               onSignOut={handleSignOut}
+              onBurgerOpen={handeleBurgerOpen}
+              isBurgerOpen={isBurgerOpen}
+              onBurgerClose={closeAllPopups}
               />
 
             <Route>
