@@ -41,6 +41,7 @@ function App() {
   const [isSuccessAction, setIsSuccessAction] = React.useState(false);
   const [email, setEmail] = React.useState(null);
   const history = useHistory();
+  const [likeCount, setLikeCount] = React.useState(false);
 
   React.useEffect(() => {
     api
@@ -62,6 +63,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+  
 
   function handleCardDelete() {
     setIsLoading(true);
@@ -264,12 +266,14 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups}
+            isSuccessAction={isSuccessAction} 
+          />
+
           <Switch>
             <Route path="/sign-up">
-              <InfoTooltip
-                isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups}
-                isSuccessAction={isSuccessAction} />
 
               <Header>
                 <div className="header__container">
@@ -283,11 +287,6 @@ function App() {
             </Route>
 
             <Route path="/sign-in">
-            <InfoTooltip
-                isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups}
-                isSuccessAction={isSuccessAction} />
-
               <Header>
                 <div className="header__container">
                   <Link className="header__link" to="/sign-up">Регистрация</Link>
